@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travis Nelson Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --cream: #FAF7F2;
+      --warm-white: #FFFEFA;
+      --cognac: #8B4513;
+      --cognac-light: #A0522D;
+      --charcoal: #2C2C2C;
+      --charcoal-light: #4A4A4A;
+      --yellow-pop: #E8B931;
+      --blue-pop: #2E5A8B;
+      --green-warm: #5B7355;
+      --green-sage: #8B9A7D;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--cream);
+      z-index: 100;
+      border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--charcoal);
+      letter-spacing: 0.15em;
+      text-transform: lowercase;
+      font-variant: small-caps;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--charcoal-light);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--cognac);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #D4C4B0 0%, #E8DFD4 100%);
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.95);
+      letter-spacing: 0.15em;
+      text-shadow: 0 2px 40px rgba(0, 0, 0, 0.15);
+      margin-bottom: 16px;
+      text-transform: lowercase;
+      font-variant: small-caps;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: 0.2em;
+      text-transform: lowercase;
+      font-variant: small-caps;
+      text-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-placeholder-text {
+      position: absolute;
+      bottom: 40px;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.25);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--cognac);
+      color: var(--warm-white);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background: var(--cognac-light);
+      transform: translateY(-2px);
+    }
+
+    /* Philosophy Section */
+    .philosophy {
+      padding: 120px 80px;
+      background: var(--warm-white);
+    }
+
+    .philosophy-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cognac);
+      margin-bottom: 24px;
+    }
+
+    .philosophy-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--charcoal);
+    }
+
+    .philosophy-text em {
+      font-style: italic;
+      color: var(--cognac);
+    }
+
+    /* Services Section */
+    .services {
+      padding: 120px 80px;
+      background: var(--cream);
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--charcoal-light);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      padding: 48px 40px;
+      background: var(--warm-white);
+      border: 1px solid rgba(139, 69, 19, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(139, 69, 19, 0.08);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-card:nth-child(1) .service-icon { color: var(--yellow-pop); }
+    .service-card:nth-child(2) .service-icon { color: var(--blue-pop); }
+    .service-card:nth-child(3) .service-icon { color: var(--green-warm); }
+
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 16px;
+    }
+
+    .service-description {
+      font-size: 15px;
+      color: var(--charcoal-light);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .service-link {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--cognac);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.3s ease;
+    }
+
+    .service-link:hover {
+      gap: 12px;
+    }
+
+    /* Portfolio Preview Section */
+    .portfolio-preview {
+      padding: 120px 80px;
+      background: var(--charcoal);
+      color: var(--warm-white);
+    }
+
+    .portfolio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+    }
+
+    .portfolio-header .section-label {
+      color: var(--yellow-pop);
+    }
+
+    .portfolio-header .section-title {
+      color: var(--warm-white);
+    }
+
+    .portfolio-link {
+      font-size: 14px;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .portfolio-link:hover {
+      color: var(--yellow-pop);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 1fr;
+      gap: 24px;
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .portfolio-item-image {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #4A4A4A 0%, #3A3A3A 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: transform 0.5s ease;
+    }
+
+    .portfolio-item:nth-child(1) .portfolio-item-image {
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, var(--cognac) 0%, #6B3410 100%);
+    }
+
+    .portfolio-item:nth-child(2) .portfolio-item-image {
+      background: linear-gradient(135deg, var(--green-sage) 0%, var(--green-warm) 100%);
+    }
+
+    .portfolio-item:nth-child(3) .portfolio-item-image {
+      background: linear-gradient(135deg, var(--blue-pop) 0%, #1E3A5A 100%);
+    }
+
+    .portfolio-item:hover .portfolio-item-image {
+      transform: scale(1.05);
+    }
+
+    .portfolio-item-info {
+      padding: 20px 0;
+    }
+
+    .portfolio-item-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .portfolio-item-type {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* About Preview Section */
+    .about-preview {
+      padding: 120px 80px;
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-image {
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #D4C4B0 0%, #C4B4A0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--charcoal-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .about-content {
+      padding-right: 40px;
+    }
+
+    .about-content .section-title {
+      margin-bottom: 24px;
+    }
+
+    .about-text {
+      font-size: 16px;
+      color: var(--charcoal-light);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .about-link {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--cognac);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 120px 80px;
+      background: var(--warm-white);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact .section-title {
+      margin-bottom: 16px;
+    }
+
+    .contact-text {
+      font-size: 18px;
+      color: var(--charcoal-light);
+      margin-bottom: 40px;
+    }
+
+    .contact-email {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      color: var(--cognac);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 48px;
+      transition: color 0.3s ease;
+    }
+
+    .contact-email:hover {
+      color: var(--cognac-light);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 80px;
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--warm-white);
+      letter-spacing: 0.15em;
+      text-transform: lowercase;
+      font-variant: small-caps;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--warm-white);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-title {
+        font-size: 56px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .portfolio-item:nth-child(1) .portfolio-item-image {
+        aspect-ratio: 4/3;
+      }
+
+      .about-preview {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .about-image {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 20px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 40px;
+      }
+
+      .hero-subtitle {
+        font-size: 13px;
+      }
+
+      .philosophy,
+      .services,
+      .portfolio-preview,
+      .about-preview,
+      .contact {
+        padding: 80px 24px;
+      }
+
+      .philosophy-text {
+        font-size: 24px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+        padding: 40px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Travis Nelson Studio</div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay">
+      <h1 class="hero-title">Travis Nelson Studio</h1>
+      <p class="hero-subtitle">Residential Design & Organization</p>
+    </div>
+    <span class="hero-placeholder-text">Hero Image</span>
+  </section>
+
+  <!-- Philosophy Section -->
+  <section class="philosophy">
+    <div class="philosophy-inner">
+      <p class="section-label">Philosophy</p>
+      <p class="philosophy-text">Organization <em>is</em> design, and design should organize your life. Clean lines, warm woods, intentional details. No clutter, no chaos, no compromise.</p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <div class="services-header">
+      <p class="section-label">Services</p>
+      <h2 class="section-title">How We Work Together</h2>
+      <p class="section-subtitle">From consultation to complete transformation</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="24" cy="24" r="20"/>
+            <path d="M24 14v10l7 7"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Consultation</h3>
+        <p class="service-description">A focused walkthrough of your space with written recommendations. Perfect for homeowners who want expert guidance before committing to a larger project.</p>
+        <a href="#" class="service-link">Learn more <span>&#8594;</span></a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="8" y="8" width="32" height="32" rx="2"/>
+            <line x1="8" y1="20" x2="40" y2="20"/>
+            <line x1="20" y1="20" x2="20" y2="40"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Organization</h3>
+        <p class="service-description">Transform kitchens, closets, and living spaces with systems designed for how you actually live. Sustainable solutions that stay organized.</p>
+        <a href="#" class="service-link">Learn more <span>&#8594;</span></a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 40h40"/>
+            <path d="M8 40V20l16-12 16 12v20"/>
+            <rect x="18" y="26" width="12" height="14"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Full Design</h3>
+        <p class="service-description">Complete room or whole-home design with furniture, decor, and integrated organizational systems. Your vision, realized.</p>
+        <a href="#" class="service-link">Learn more <span>&#8594;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Preview -->
+  <section class="portfolio-preview" id="portfolio">
+    <div class="portfolio-header">
+      <div>
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title">Recent Work</h2>
+      </div>
+      <a href="#" class="portfolio-link">View all projects <span>&#8594;</span></a>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <div class="portfolio-item-image">Project Image</div>
+        <div class="portfolio-item-info">
+          <h3 class="portfolio-item-title">Manzanita Kitchen</h3>
+          <p class="portfolio-item-type">Organization</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <div class="portfolio-item-image">Project Image</div>
+        <div class="portfolio-item-info">
+          <h3 class="portfolio-item-title">Desert Modern Living</h3>
+          <p class="portfolio-item-type">Full Design</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <div class="portfolio-item-image">Project Image</div>
+        <div class="portfolio-item-info">
+          <h3 class="portfolio-item-title">Wine Country Retreat</h3>
+          <p class="portfolio-item-type">Design + Organization</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Preview -->
+  <section class="about-preview" id="about">
+    <div class="about-image">Your Photo</div>
+    <div class="about-content">
+      <p class="section-label">About</p>
+      <h2 class="section-title">Travis Nelson</h2>
+      <p class="about-text">I believe that how we organize our homes shapes how we live our lives. My approach blends warm aesthetics with functional systems, creating spaces that feel both elevated and effortless.</p>
+      <p class="about-text">Based in California, working in Palm Springs, Sonoma, and beyond.</p>
+      <a href="#" class="about-link">More about my approach <span>&#8594;</span></a>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Ready to transform your space?</h2>
+      <p class="contact-text">Every project begins with a conversation. Tell me about your home and what you're hoping to create.</p>
+      <a href="mailto:hello@travisnelson.studio" class="contact-email">hello@travisnelson.studio</a>
+      <br>
+      <a href="#" class="cta-button">Schedule a Consultation</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">Travis Nelson Studio</div>
+    <ul class="footer-links">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Pinterest</a></li>
+    </ul>
+    <p>&copy; 2026 Travis Nelson Studio</p>
+  </footer>
+
+</body>
+</html>
