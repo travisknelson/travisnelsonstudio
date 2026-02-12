@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travis Nelson Studio</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,9 +23,10 @@
       --charcoal: #2C2C2C;
       --charcoal-light: #4A4A4A;
       --yellow-pop: #E8B931;
-      --blue-pop: #2E5A8B;
+      --blue-pop: #3355FF;
       --green-warm: #5B7355;
       --green-sage: #8B9A7D;
+      --mcm-amber: #D4891C;
     }
 
     html {
@@ -34,6 +36,10 @@
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--warm-white);
+      background-image:
+        linear-gradient(to right, rgba(139, 69, 19, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(139, 69, 19, 0.04) 1px, transparent 1px);
+      background-size: 10px 10px;
       color: var(--charcoal);
       line-height: 1.6;
       font-weight: 300;
@@ -48,7 +54,7 @@
       padding: 20px 48px 20px 32px;
       display: flex;
       align-items: center;
-      background: var(--warm-white);
+      background: transparent;
       z-index: 100;
     }
 
@@ -61,6 +67,64 @@
       text-transform: lowercase;
       font-variant: small-caps;
       text-decoration: none;
+    }
+
+    .logo-studio {
+      display: inline;
+      transition: opacity 0.3s ease, font-size 0.3s ease, letter-spacing 0.3s ease;
+    }
+
+    .logo-studio.shifted {
+      opacity: 0;
+      font-size: 0;
+      letter-spacing: 0;
+    }
+
+    .nav-section {
+      font-family: 'Oswald', sans-serif;
+      font-size: 44px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue-pop);
+      margin-left: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-decoration: none;
+    }
+
+    .nav-section.visible {
+      opacity: 1;
+    }
+
+    .nav-section.clickable {
+      cursor: pointer;
+    }
+
+    .nav-section.clickable:hover {
+      color: var(--cognac);
+    }
+
+    .nav-studio-right {
+      position: fixed;
+      top: 20px;
+      right: 48px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: lowercase;
+      font-variant: small-caps;
+      color: var(--charcoal);
+      text-decoration: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-studio-right.visible {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     /* Hero Section */
@@ -80,13 +144,23 @@
       background: url('travishero.png') center/cover no-repeat;
       overflow: hidden;
       border-radius: 0;
-      margin: 16px 0 16px 32px;
+      margin: 48px 0 48px 64px;
+    }
+
+    .hero-person-link {
+      position: absolute;
+      width: 50%;
+      height: 80%;
+      top: 10%;
+      left: 25%;
+      cursor: pointer;
+      z-index: 2;
     }
 
     .hero-sidebar {
       width: 280px;
       flex-shrink: 0;
-      background: var(--warm-white);
+      background: transparent;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
@@ -151,6 +225,10 @@
       display: block;
     }
 
+    #services-page {
+      overflow: hidden;
+    }
+
     .hero.hidden {
       display: none;
     }
@@ -165,7 +243,7 @@
     }
 
     .hero-sidebar-links a.active {
-      color: var(--cognac);
+      color: var(--blue-pop);
     }
 
     /* Hide old standalone sections and footer */
@@ -191,12 +269,14 @@
     }
 
     .section-label {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
+      font-family: 'Oswald', sans-serif;
+      font-size: 64px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--cognac);
-      margin-bottom: 24px;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+      text-align: left;
     }
 
     .philosophy-text {
@@ -225,80 +305,153 @@
 
     .section-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 42px;
+      font-size: 20px;
       font-weight: 400;
-      color: var(--charcoal);
-      margin-bottom: 16px;
-    }
-
-    .section-subtitle {
-      font-size: 16px;
+      font-style: italic;
       color: var(--charcoal-light);
+      margin-bottom: 48px;
+      text-align: right;
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .services-layout {
+      display: flex;
+      align-items: center;
+      min-height: calc(100vh - 160px);
+      justify-content: space-between;
+    }
+
+    .services-landing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      min-height: calc(100vh - 160px);
       gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
     }
 
-    .service-card {
-      padding: 48px 40px;
-      background: var(--warm-white);
-      border: 1px solid rgba(139, 69, 19, 0.1);
-      transition: all 0.3s ease;
+    .services-landing.hidden {
+      display: none;
     }
 
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(139, 69, 19, 0.08);
+    .services-landing-item {
+      cursor: pointer;
     }
 
-    .service-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 24px;
+    .services-landing-item-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      transition: color 0.3s ease;
+    }
+
+    .services-landing-item-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--charcoal-light);
+      margin-top: 6px;
+    }
+
+    .services-landing-item:hover .services-landing-item-name {
+      color: var(--mcm-amber);
+    }
+
+    .services-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .services-list.hidden {
+      display: none;
+    }
+
+    .tier-image.hidden {
+      display: none;
+    }
+
+    .services-list-item {
+      padding: 4px 0;
+      cursor: pointer;
+    }
+
+    .services-list-item-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      transition: color 0.3s ease;
+    }
+
+    .services-list-item-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--charcoal-light);
+      margin-top: 4px;
+    }
+
+    .services-list-item.active .services-list-item-name,
+    .services-list-item:hover .services-list-item-name {
+      color: var(--mcm-amber);
+    }
+
+    .tier-image {
+      width: 560px;
+      flex-shrink: 0;
+      aspect-ratio: 4/3;
+      position: relative;
+      overflow: hidden;
+      margin-right: -60px;
+    }
+
+    .tier-image img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+    }
+
+    .tier-image img.active {
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .tier-image-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--cream) 0%, #E8D5C0 100%);
       display: flex;
       align-items: center;
       justify-content: center;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      z-index: 1;
     }
 
-    .service-card:nth-child(1) .service-icon { color: var(--yellow-pop); }
-    .service-card:nth-child(2) .service-icon { color: var(--blue-pop); }
-    .service-card:nth-child(3) .service-icon { color: var(--green-warm); }
-
-    .service-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-weight: 500;
-      color: var(--charcoal);
-      margin-bottom: 16px;
+    .tier-image-placeholder.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
 
-    .service-description {
-      font-size: 15px;
-      color: var(--charcoal-light);
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-
-    .service-link {
+    .tier-image-placeholder span {
+      font-family: 'Inter', sans-serif;
       font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
+      font-weight: 300;
       text-transform: uppercase;
-      color: var(--cognac);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: gap 0.3s ease;
-    }
-
-    .service-link:hover {
-      gap: 12px;
+      letter-spacing: 0.18em;
+      color: var(--charcoal-light);
     }
 
     /* Portfolio Preview Section */
@@ -341,8 +494,8 @@
 
     .portfolio-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr 1fr;
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
     .portfolio-item {
@@ -352,8 +505,9 @@
     }
 
     .portfolio-item-image {
-      aspect-ratio: 4/3;
-      background: linear-gradient(135deg, #4A4A4A 0%, #3A3A3A 100%);
+      aspect-ratio: 1/1;
+      background-size: cover;
+      background-position: center;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -361,24 +515,6 @@
       color: rgba(255,255,255,0.3);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      transition: transform 0.5s ease;
-    }
-
-    .portfolio-item:nth-child(1) .portfolio-item-image {
-      aspect-ratio: 3/4;
-      background: linear-gradient(135deg, var(--cognac) 0%, #6B3410 100%);
-    }
-
-    .portfolio-item:nth-child(2) .portfolio-item-image {
-      background: linear-gradient(135deg, var(--green-sage) 0%, var(--green-warm) 100%);
-    }
-
-    .portfolio-item:nth-child(3) .portfolio-item-image {
-      background: linear-gradient(135deg, var(--blue-pop) 0%, #1E3A5A 100%);
-    }
-
-    .portfolio-item:hover .portfolio-item-image {
-      transform: scale(1.05);
     }
 
     .portfolio-item-info {
@@ -390,6 +526,11 @@
       font-size: 20px;
       font-weight: 500;
       margin-bottom: 4px;
+      transition: color 0.3s ease;
+    }
+
+    .portfolio-item:hover .portfolio-item-title {
+      color: var(--yellow-pop);
     }
 
     .portfolio-item-type {
@@ -399,35 +540,165 @@
       letter-spacing: 0.05em;
     }
 
-    /* About Preview Section */
-    .about-preview {
-      padding: 120px 80px;
-      background: var(--warm-white);
+    /* Portfolio Detail Page */
+    .portfolio-detail {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding-top: 0;
+      position: relative;
+    }
+
+    .portfolio-detail-back {
+      position: absolute;
+      left: -36px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+    }
+
+    .portfolio-detail-back:hover {
+      opacity: 1;
+    }
+
+    .portfolio-detail-back svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--charcoal);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .portfolio-detail-image {
+      width: calc((100% - 32px) / 3 / 3);
+      aspect-ratio: 1/1;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+    }
+
+    .portfolio-detail-header {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 0;
+    }
+
+    .portfolio-detail-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--blue-pop);
+      margin: 0;
+    }
+
+    .portfolio-detail-type {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--charcoal-light);
+      margin-top: 3px;
+    }
+
+    .portfolio-detail-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--charcoal-light);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    .portfolio-detail-gallery {
+      margin-top: 40px;
+      /* Indent: half the small square width */
+      margin-left: calc((100% - 32px) / 3 / 3 / 2);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .portfolio-detail-gallery-image {
+      width: calc(100% - 64px);
+      aspect-ratio: 16/10;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--cream);
+    }
+
+    /* About Page Layout */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 35% 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .about-text-col {
+      position: sticky;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .about-image-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      grid-template-rows: auto 1fr auto;
+      gap: 10px;
+    }
+
+    .about-image-grid-item {
+      background-color: var(--cream);
+      display: flex;
       align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-height: 0;
     }
 
-    .about-image {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
+    .about-image-grid-item span {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--charcoal-light);
     }
 
-    .about-content {
-      padding-right: 40px;
+    .about-image-grid-item:nth-child(1) {
+      grid-column: 1 / -1;
+      aspect-ratio: 16/9;
     }
 
-    .about-content .section-title {
-      margin-bottom: 24px;
+    .about-image-grid-item:nth-child(2) {
+      aspect-ratio: 3/4;
+    }
+
+    .about-image-grid-item:nth-child(3) {
+      aspect-ratio: auto;
+      align-self: stretch;
+    }
+
+    .about-image-grid-item:nth-child(4) {
+      grid-column: 1 / -1;
+      aspect-ratio: 21/9;
     }
 
     .about-text {
-      font-size: 16px;
-      color: var(--charcoal-light);
-      line-height: 1.8;
-      margin-bottom: 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.7;
+      margin-bottom: 0;
     }
 
     .about-link {
@@ -516,17 +787,12 @@
 
     /* Responsive */
     @media (max-width: 1024px) {
-      .services-grid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
+      .tier-image {
+        width: 360px;
       }
 
       .portfolio-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .portfolio-item:nth-child(1) .portfolio-item-image {
-        aspect-ratio: 4/3;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .about-preview {
@@ -586,6 +852,15 @@
         grid-template-columns: 1fr;
       }
 
+      .services-layout {
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .tier-image {
+        width: 100%;
+      }
+
       .portfolio-header {
         flex-direction: column;
         align-items: flex-start;
@@ -599,110 +874,179 @@
         padding: 40px 24px;
       }
     }
+
   </style>
 </head>
 <body>
 
   <!-- Navigation -->
   <nav>
-    <a href="#" class="logo">Travis Nelson Studio</a>
+    <a href="#" class="logo">Travis Nelson <span class="logo-studio" id="logo-studio">Studio</span></a>
+    <a href="#" class="nav-section" id="nav-section"></a>
+    <a href="#" class="nav-studio-right" id="nav-studio-right">Studio</a>
   </nav>
 
   <!-- Hero Section -->
   <div class="hero-section">
     <section class="hero">
+      <a href="#about" class="hero-person-link"></a>
     </section>
 
     <!-- Page content panels (replace hero when active) -->
     <div class="page-content" id="services-page">
-      <p class="section-label">Services</p>
-      <h2 class="section-title">How We Work Together</h2>
-      <p class="section-subtitle" style="margin-bottom: 48px;">From consultation to complete transformation</p>
-      <div class="services-grid" style="display:grid;">
-        <div class="service-card">
-          <div class="service-icon" style="color: var(--yellow-pop);">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="24" cy="24" r="20"/><path d="M24 14v10l7 7"/>
-            </svg>
+      <div class="services-layout">
+        <div class="services-landing" id="services-landing">
+          <div class="services-landing-item" data-tier="targeted">
+            <div class="services-landing-item-name">Targeted Space</div>
+            <div class="services-landing-item-desc">Part of a room. Cabinets, drawers, storage.</div>
           </div>
-          <h3 class="service-title">Consultation</h3>
-          <p class="service-description">A focused walkthrough of your space with written recommendations. Perfect for homeowners who want expert guidance before committing to a larger project.</p>
+          <div class="services-landing-item" data-tier="room">
+            <div class="services-landing-item-name">Room</div>
+            <div class="services-landing-item-desc">Whole room. Kitchen, bed, bath, living, office.</div>
+          </div>
+          <div class="services-landing-item" data-tier="groundup">
+            <div class="services-landing-item-name">Ground-Up</div>
+            <div class="services-landing-item-desc">Whole house. Total restart. Move-in.</div>
+          </div>
         </div>
-        <div class="service-card">
-          <div class="service-icon" style="color: var(--blue-pop);">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="8" y="8" width="32" height="32" rx="2"/><line x1="8" y1="20" x2="40" y2="20"/><line x1="20" y1="20" x2="20" y2="40"/>
-            </svg>
+        <div class="services-list hidden" id="services-list">
+          <div class="services-list-item" data-tier="targeted">
+            <div class="services-list-item-name">Targeted Space</div>
+            <div class="services-list-item-desc">Part of a room. Cabinets, drawers, storage.</div>
           </div>
-          <h3 class="service-title">Organization</h3>
-          <p class="service-description">Transform kitchens, closets, and living spaces with systems designed for how you actually live. Sustainable solutions that stay organized.</p>
+          <div class="services-list-item" data-tier="room">
+            <div class="services-list-item-name">Room</div>
+            <div class="services-list-item-desc">Whole room. Kitchen, bed, bath, living, office.</div>
+          </div>
+          <div class="services-list-item" data-tier="groundup">
+            <div class="services-list-item-name">Ground-Up</div>
+            <div class="services-list-item-desc">Whole house. Total restart. Move-in.</div>
+          </div>
         </div>
-        <div class="service-card">
-          <div class="service-icon" style="color: var(--green-warm);">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M4 40h40"/><path d="M8 40V20l16-12 16 12v20"/><rect x="18" y="26" width="12" height="14"/>
-            </svg>
+        <div class="tier-image hidden" id="tier-image">
+          <div class="tier-image-placeholder" id="tier-placeholder">
+            <span>Select a scope to explore.</span>
           </div>
-          <h3 class="service-title">Full Design</h3>
-          <p class="service-description">Complete room or whole-home design with furniture, decor, and integrated organizational systems. Your vision, realized.</p>
+          <img src="targetedspace_placeholder.jpg" alt="Neatly rolled kitchen towels in drawer" data-tier="targeted"/>
+          <img src="room_placeholder.jpg" alt="Mid-century modern Palm Springs living room" data-tier="room"/>
+          <img src="groundup_placeholder.jpg" alt="Iconic Palm Springs mid-century house" data-tier="groundup"/>
         </div>
       </div>
     </div>
 
     <div class="page-content" id="portfolio-page">
-      <p class="section-label">Portfolio</p>
-      <h2 class="section-title">Recent Work</h2>
-      <div class="portfolio-grid" style="display:grid; margin-top: 48px;">
-        <div class="portfolio-item">
-          <div class="portfolio-item-image">Project Image</div>
+      <div class="portfolio-grid" style="display:grid;">
+        <div class="portfolio-item" data-slug="yosemite" data-image="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&h=600&fit=crop" data-title="Yosemite Valley Residence" data-type="Ground-Up">
+          <div class="portfolio-item-image" style="background-image: url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&h=600&fit=crop');"></div>
           <div class="portfolio-item-info">
-            <h3 class="portfolio-item-title">Manzanita Kitchen</h3>
-            <p class="portfolio-item-type">Organization</p>
+            <h3 class="portfolio-item-title">Yosemite Valley Residence</h3>
+            <p class="portfolio-item-type">Ground-Up</p>
           </div>
         </div>
-        <div class="portfolio-item">
-          <div class="portfolio-item-image">Project Image</div>
+        <div class="portfolio-item" data-slug="bigsur" data-image="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?w=600&h=600&fit=crop" data-title="Big Sur Cliffside" data-type="Room">
+          <div class="portfolio-item-image" style="background-image: url('https://images.unsplash.com/photo-1449034446853-66c86144b0ad?w=600&h=600&fit=crop');"></div>
           <div class="portfolio-item-info">
-            <h3 class="portfolio-item-title">Desert Modern Living</h3>
-            <p class="portfolio-item-type">Full Design</p>
+            <h3 class="portfolio-item-title">Big Sur Cliffside</h3>
+            <p class="portfolio-item-type">Room</p>
           </div>
         </div>
-        <div class="portfolio-item">
-          <div class="portfolio-item-image">Project Image</div>
+        <div class="portfolio-item" data-slug="deathvalley" data-image="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=600&h=600&fit=crop" data-title="Death Valley Modern" data-type="Ground-Up">
+          <div class="portfolio-item-image" style="background-image: url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=600&h=600&fit=crop');"></div>
           <div class="portfolio-item-info">
-            <h3 class="portfolio-item-title">Wine Country Retreat</h3>
-            <p class="portfolio-item-type">Design + Organization</p>
+            <h3 class="portfolio-item-title">Death Valley Modern</h3>
+            <p class="portfolio-item-type">Ground-Up</p>
+          </div>
+        </div>
+        <div class="portfolio-item" data-slug="sonoma" data-image="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop" data-title="Sonoma Wine Country" data-type="Targeted Space">
+          <div class="portfolio-item-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop');"></div>
+          <div class="portfolio-item-info">
+            <h3 class="portfolio-item-title">Sonoma Wine Country</h3>
+            <p class="portfolio-item-type">Targeted Space</p>
+          </div>
+        </div>
+        <div class="portfolio-item" data-slug="redwood" data-image="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&h=600&fit=crop" data-title="Redwood Forest Cabin" data-type="Room">
+          <div class="portfolio-item-image" style="background-image: url('https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&h=600&fit=crop');"></div>
+          <div class="portfolio-item-info">
+            <h3 class="portfolio-item-title">Redwood Forest Cabin</h3>
+            <p class="portfolio-item-type">Room</p>
+          </div>
+        </div>
+        <div class="portfolio-item" data-slug="palmsprings" data-image="https://images.unsplash.com/photo-1414016642750-7fdd78dc33d9?w=600&h=600&fit=crop" data-title="Palm Springs Retreat" data-type="Ground-Up">
+          <div class="portfolio-item-image" style="background-image: url('https://images.unsplash.com/photo-1414016642750-7fdd78dc33d9?w=600&h=600&fit=crop');"></div>
+          <div class="portfolio-item-info">
+            <h3 class="portfolio-item-title">Palm Springs Retreat</h3>
+            <p class="portfolio-item-type">Ground-Up</p>
+          </div>
+        </div>
+        <div class="portfolio-item" data-slug="malibu" data-image="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?w=600&h=600&fit=crop" data-title="Malibu Coastal" data-type="Room">
+          <div class="portfolio-item-image" style="background-image: url('https://images.unsplash.com/photo-1518623489648-a173ef7824f3?w=600&h=600&fit=crop');"></div>
+          <div class="portfolio-item-info">
+            <h3 class="portfolio-item-title">Malibu Coastal</h3>
+            <p class="portfolio-item-type">Room</p>
+          </div>
+        </div>
+        <div class="portfolio-item" data-slug="sierra" data-image="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&h=600&fit=crop" data-title="Sierra Nevada Lodge" data-type="Targeted Space">
+          <div class="portfolio-item-image" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&h=600&fit=crop');"></div>
+          <div class="portfolio-item-info">
+            <h3 class="portfolio-item-title">Sierra Nevada Lodge</h3>
+            <p class="portfolio-item-type">Targeted Space</p>
+          </div>
+        </div>
+        <div class="portfolio-item" data-slug="laguna" data-image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=600&fit=crop" data-title="Laguna Beach House" data-type="Ground-Up">
+          <div class="portfolio-item-image" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=600&fit=crop');"></div>
+          <div class="portfolio-item-info">
+            <h3 class="portfolio-item-title">Laguna Beach House</h3>
+            <p class="portfolio-item-type">Ground-Up</p>
           </div>
         </div>
       </div>
     </div>
 
     <div class="page-content" id="about-page">
-      <p class="section-label">About</p>
-      <h2 class="section-title">Travis Nelson</h2>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 48px;">
-        <img src="travisprofile.png" alt="Travis Nelson" style="width: 100%; aspect-ratio: 4/5; object-fit: cover;">
-        <div>
-          <p class="about-text">I believe that how we organize our homes shapes how we live our lives. My approach blends warm aesthetics with functional systems, creating spaces that feel both elevated and effortless.</p>
-          <p class="about-text">Based in California, working in Palm Springs, Sonoma, and beyond.</p>
+      <div class="about-layout">
+        <div class="about-text-col">
+          <p class="about-text">I'm Travis. I like order. Function. Warmth. Color. Low deserts. High deserts. Freeways. Mountain passes. The High Sierra.</p>
+        </div>
+        <div class="about-image-grid">
+          <div class="about-image-grid-item"><span>Image 1</span></div>
+          <div class="about-image-grid-item"><span>Image 2</span></div>
+          <div class="about-image-grid-item"><span>Image 3</span></div>
+          <div class="about-image-grid-item"><span>Image 4</span></div>
         </div>
       </div>
     </div>
 
     <div class="page-content" id="contact-page">
-      <p class="section-label">Get in Touch</p>
-      <h2 class="section-title">Ready to transform your space?</h2>
-      <p class="contact-text" style="margin-top: 24px;">Every project begins with a conversation. Tell me about your home and what you're hoping to create.</p>
+      <p class="contact-text">Every project begins with a conversation. Tell me about your home and what you're hoping to create.</p>
       <a href="mailto:hello@travisnelson.studio" class="contact-email">hello@travisnelson.studio</a>
       <br><br>
       <a href="#" class="cta-button">Schedule a Consultation</a>
     </div>
 
+    <div class="page-content" id="portfolio-detail-page">
+      <div class="portfolio-detail">
+        <a href="#portfolio" class="portfolio-detail-back">
+          <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </a>
+        <div class="portfolio-detail-image" id="portfolio-detail-image"></div>
+        <div class="portfolio-detail-header">
+          <h2 class="portfolio-detail-title" id="portfolio-detail-title"></h2>
+          <p class="portfolio-detail-type" id="portfolio-detail-type"></p>
+          <div class="portfolio-detail-meta">
+            Palm Springs, California<br>
+            Kitchen, Living, Primary Suite<br>
+            Completed January 2026
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-detail-gallery" id="portfolio-detail-gallery"></div>
+    </div>
+
     <div class="hero-sidebar">
       <ul class="hero-sidebar-links">
-        <li><a href="#services">Services</a></li>
+<li><a href="#services">Services</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#about">About</a></li>
+<li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -716,27 +1060,127 @@
       contact: 'contact-page'
     };
 
+    const sectionNames = {
+      services: 'Services',
+      portfolio: 'Portfolio',
+      about: 'About',
+      contact: 'Contact'
+    };
+
+    // Portfolio data for detail pages
+    const portfolioData = {};
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      const slug = item.getAttribute('data-slug');
+      if (slug) {
+        portfolioData[slug] = {
+          image: item.getAttribute('data-image'),
+          title: item.getAttribute('data-title'),
+          type: item.getAttribute('data-type'),
+          gallery: []
+        };
+      }
+    });
+
+    // Add gallery images for Yosemite Valley Residence
+    portfolioData['yosemite'].gallery = [
+      'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1200&h=750&fit=crop',
+      'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=1200&h=750&fit=crop',
+      'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&h=750&fit=crop',
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&h=750&fit=crop',
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&h=750&fit=crop',
+      'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=1200&h=750&fit=crop'
+    ];
+
     function navigate() {
       const hash = location.hash.replace('#', '');
       const hero = document.querySelector('.hero');
       const pages = document.querySelectorAll('.page-content');
       const links = document.querySelectorAll('.hero-sidebar-links a');
+      const navSection = document.getElementById('nav-section');
+      const logoStudio = document.getElementById('logo-studio');
+      const studioRight = document.getElementById('nav-studio-right');
 
       // Hide all pages
       pages.forEach(p => p.classList.remove('active'));
       // Remove active from all links
       links.forEach(l => l.classList.remove('active'));
 
+      // Check for portfolio detail route (e.g., #portfolio-yosemite)
+      if (hash.startsWith('portfolio-')) {
+        const slug = hash.replace('portfolio-', '');
+        const project = portfolioData[slug];
+        if (project) {
+          // Populate detail page
+          document.getElementById('portfolio-detail-image').style.backgroundImage = `url('${project.image}')`;
+          document.getElementById('portfolio-detail-title').textContent = project.title;
+          document.getElementById('portfolio-detail-type').textContent = project.type;
+
+          // Populate gallery
+          const gallery = document.getElementById('portfolio-detail-gallery');
+          gallery.innerHTML = '';
+          if (project.gallery && project.gallery.length > 0) {
+            project.gallery.forEach(imgUrl => {
+              const div = document.createElement('div');
+              div.className = 'portfolio-detail-gallery-image';
+              div.style.backgroundImage = `url('${imgUrl}')`;
+              gallery.appendChild(div);
+            });
+          }
+
+          // Show detail page, hide hero
+          hero.classList.add('hidden');
+          document.getElementById('portfolio-detail-page').classList.add('active');
+          // Fade out inline Studio, fade in right Studio
+          logoStudio.classList.add('shifted');
+          studioRight.classList.add('visible');
+          // Show "Portfolio" in nav section (parent section) - make it clickable
+          navSection.textContent = 'Portfolio';
+          navSection.href = '#portfolio';
+          navSection.classList.add('visible', 'clickable');
+          // Mark portfolio link as active
+          links.forEach(l => {
+            if (l.getAttribute('href') === '#portfolio') l.classList.add('active');
+          });
+          return;
+        }
+      }
+
       if (hash && routes[hash]) {
+        // Reset services landing state when navigating to services
+        if (hash === 'services') {
+          const landing = document.getElementById('services-landing');
+          const list = document.getElementById('services-list');
+          const tierImage = document.getElementById('tier-image');
+          const placeholder = document.getElementById('tier-placeholder');
+          landing.classList.remove('hidden');
+          list.classList.add('hidden');
+          tierImage.classList.add('hidden');
+          if (placeholder) placeholder.classList.remove('hidden');
+          document.querySelectorAll('.services-list-item').forEach(i => i.classList.remove('active'));
+          document.querySelectorAll('.tier-image img').forEach(img => img.classList.remove('active'));
+        }
         // Show the matching page, hide hero
         hero.classList.add('hidden');
         document.getElementById(routes[hash]).classList.add('active');
+        // Fade out inline Studio, fade in right Studio
+        logoStudio.classList.add('shifted');
+        studioRight.classList.add('visible');
+        // Show section name in Studio's original place
+        navSection.textContent = sectionNames[hash] || '';
+        navSection.href = '#' + hash;
+        navSection.classList.add('visible');
+        navSection.classList.add('clickable');
         // Mark active link
         links.forEach(l => {
           if (l.getAttribute('href') === '#' + hash) l.classList.add('active');
         });
       } else {
         // Show hero (home) with fade
+        logoStudio.classList.remove('shifted');
+        studioRight.classList.remove('visible');
+        navSection.textContent = '';
+        navSection.href = '#';
+        navSection.classList.remove('visible', 'clickable');
         hero.classList.remove('hidden');
         hero.classList.remove('fade-in');
         void hero.offsetWidth; // force reflow to restart animation
@@ -746,6 +1190,82 @@
 
     window.addEventListener('hashchange', navigate);
     window.addEventListener('DOMContentLoaded', navigate);
+
+    // Portfolio item click -> navigate to detail page
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const slug = item.getAttribute('data-slug');
+        if (slug) {
+          location.hash = 'portfolio-' + slug;
+        }
+      });
+    });
+
+    // Services landing -> split layout transition
+    function activateServicesTier(tier) {
+      const landing = document.getElementById('services-landing');
+      const list = document.getElementById('services-list');
+      const tierImage = document.getElementById('tier-image');
+      // Hide landing, show split layout
+      landing.classList.add('hidden');
+      list.classList.remove('hidden');
+      tierImage.classList.remove('hidden');
+      // Hide placeholder
+      const placeholder = document.getElementById('tier-placeholder');
+      if (placeholder && !placeholder.classList.contains('hidden')) {
+        placeholder.classList.add('hidden');
+      }
+      // Set active list item
+      document.querySelectorAll('.services-list-item').forEach(i => {
+        i.classList.remove('active');
+        if (i.getAttribute('data-tier') === tier) i.classList.add('active');
+      });
+      // Show matching image
+      document.querySelectorAll('.tier-image img').forEach(img => {
+        img.classList.remove('active');
+        if (img.getAttribute('data-tier') === tier) {
+          void img.offsetWidth;
+          img.classList.add('active');
+        }
+      });
+      // Animate the split layout in
+      list.style.animation = 'fadeIn 0.3s ease';
+      tierImage.style.animation = 'fadeIn 0.3s ease';
+    }
+
+    // Landing item clicks
+    document.querySelectorAll('.services-landing-item').forEach(item => {
+      item.addEventListener('click', () => {
+        activateServicesTier(item.getAttribute('data-tier'));
+      });
+    });
+
+    // Service tier click -> swap image (in split layout)
+    document.querySelectorAll('.services-list-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const tier = item.getAttribute('data-tier');
+        // Update active list item
+        document.querySelectorAll('.services-list-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        // Swap image with fadeIn animation
+        document.querySelectorAll('.tier-image img').forEach(img => {
+          img.classList.remove('active');
+          if (img.getAttribute('data-tier') === tier) {
+            void img.offsetWidth;
+            img.classList.add('active');
+          }
+        });
+      });
+    });
+
+    // Map landmark hover -> show pin card
+    document.querySelectorAll('.map-landmark').forEach(lm => {
+      const key = lm.getAttribute('data-project');
+      const pin = document.querySelector('.map-pin[data-for="' + key + '"]');
+      if (!pin) return;
+      lm.addEventListener('mouseenter', () => pin.classList.add('show-card'));
+      lm.addEventListener('mouseleave', () => pin.classList.remove('show-card'));
+    });
   </script>
 </body>
 </html>
